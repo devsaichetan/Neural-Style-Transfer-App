@@ -32,10 +32,21 @@ os.makedirs(BASE_DIR / "outputs", exist_ok=True)
 # =====================================================
 # Static and Templates
 # =====================================================
-app.mount("/static", StaticFiles(directory="static"), name="static")
-app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"),
+    name="static"
+)
 
-templates = Jinja2Templates(directory="templates")
+app.mount(
+    "/outputs",
+    StaticFiles(directory=BASE_DIR / "outputs"),
+    name="outputs"
+)
+
+templates = Jinja2Templates(
+    directory=BASE_DIR / "templates"
+)
 
 # =====================================================
 # Device (Render Free has no GPU)
